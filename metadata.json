@@ -1,0 +1,5 @@
+{
+  "name": "Gemini Smart Calculator",
+  "description": "A powerful calculator powered by Google Gemini that solves complex math problems and explains the steps.",
+  "requestFramePermissions": []
+}

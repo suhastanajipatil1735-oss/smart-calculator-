@@ -2,7 +2,7 @@ import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { CalculationResponse } from '../types';
 
 // Initialize Gemini Client
-// Note: Ensure process.env.API_KEY is set in your Vercel project settings
+// The API key must be obtained exclusively from the environment variable process.env.API_KEY.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const modelName = "gemini-2.5-flash";
@@ -27,6 +27,14 @@ const calculationSchema: Schema = {
 };
 
 export const solveMathProblem = async (input: string): Promise<CalculationResponse> => {
+  if (!process.env.API_KEY) {
+     return {
+      result: "Config Error",
+      explanation: "API Key is missing. Please add API_KEY to your Vercel Environment Variables.",
+      isError: true,
+    };
+  }
+
   if (!input.trim()) {
     return {
       result: "",
